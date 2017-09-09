@@ -1,0 +1,23 @@
+version: '2'
+services:
+  elasticsearch1:
+    image: docker.elastic.co/elasticsearch/elasticsearch:5.5.2
+    container_name: elasticsearch1
+    environment:
+      - cluster.name=my_cluster1
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "transport.host=127.0.0.1"
+      - "http.host=0.0.0.0"
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+    networks:
+      - esnet
+
+volumes:
+  esdata1:
+    driver: local
+
+networks:
+  esnet:
